@@ -62,12 +62,69 @@ One the file was in the controller it was simple to convert the photo file to a 
 
 
 ###Page Styling
-The page styling was adjusted based off of a color palette defined by the project-manager and some basic styling guidelines. A combination of bootstrap, basic CSS, and Razor syntax markup were used to manage the appearance of the page. 
-	The biggest challenge was to populate the view with the photos from the database. This involved passing those data from the database as a byte[] converting it to a string that could then be converted to an image by the src tag of the <img> element.
+The page styling was adjusted based off of a color palette defined by the project-manager and some basic styling guidelines. A combination of bootstrap, basic CSS, and Razor syntax markup were used to manage the appearance of the page. For the Cast Member Index page the design requested different sections based off of the different productions that were currently being performed by the theater. Most of the code below is devoted to manipulating the content in that way.
+	The biggest challenge was to populate the view with the photos from the database. This involved passing those data from the database as a byte[], converting it to a string which could be converted to an image by the src tag of the <img> element.
+	
 Index Page gif of 
 
+Generating different sections for different productions and populating photos to the view.
 
-Code here:
+    CastMembers/Views/Index.cshtml
+
+    @{
+    // This creates an IEnumerable object which finds the number of distinct shows that are playing at the theater
+    IEnumerable<string> showsEnum = Model.Select(x => x.ProductionTitle).Distinct();
+
+    // This converts the above IEnumerable to a List
+    List<string> showsList = showsEnum.ToList();
+
+    // this starts a loop which effectively creates a different section on the index page for each production that is occuring at the theater
+    for (int i = 0; i < showsList.Count(); i++)
+    {
+        // This prints the name of the show that is being represented in this section.
+        <h4>@showsList[i]</h4>
+        <hr class="cast_member-index--breakline" />
+        <div class="cast_member-index--row">
+            <!--This loop adds actors to this section of the page if the show that they are acting in is the same as the section (e.g. if they are acting in Les Mis and this is the Les Mis section they will be added)-->
+            @foreach (var cast in Model)
+            {
+		if (cast.ProductionTitle == showsList[i])
+		{
+		    <div class="card cast_member-index--cards" style="width: 18rem;">
+			@{
+			    // This line of code takes the byte[] data from cast.Photo converts it to a base 64 string and puts it in a string variable
+			    string imgString = Convert.ToBase64String(cast.Photo);
+			    // This creates a string that will convert the base64string back into an image when it is included in the src tag of the image
+			    string imgsrc = string.Format("data:image/png;base64,{0}", imgString);
+			}
+			<img class="card-img-bottom" src="@imgsrc" />
+			<div class="cast_member-index--cardoverlay">
+			// These blocks create font-awesome icons that can be used as links
+			    @Html.ActionLink("‎",
+					     "Edit",
+					     "CastMembers",
+					     new {id = cast.CastMemberId},
+					     new { @class = "fa fa-pencil-square fa-4x cast_member-index--editoverlay" }
+					     )
+			    @Html.ActionLink("‎",
+					     "Delete",
+					     "CastMembers",
+					     new { id = cast.CastMemberId },
+					     new { @class = "fa fa-trash-o fa-4x cast_member-index--deleteoverlay" }
+					     )
+			</div>
+			// This link is adjusted using CSS to cover the entire area of the image so that the whole image can be used as a link
+			<a href="/Prod/CastMembers/Details/@cast.CastMemberId" class="cast_member-index--detailslink"></a>
+			<div class="card-body cast_member-index--cardbody d-flex justify-content-center">
+			    <h5 class="card-title">@cast.ProductionTitle</h5>
+			</div>
+		    </div>
+		}
+	    }
+	</div>
+	<br />
+   	}
+	
 
 
 ###Search Function
