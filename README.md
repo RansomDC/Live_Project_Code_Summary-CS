@@ -21,8 +21,7 @@ Font-awesome
 
 
 # Basic CRUD Functionality/Photo Upload and Conversion
-```diff
-- text in red
+
    After the creation of the models I needed for the Cast Member section of the website, ASP.NET MVC provided the majority of the scaffolding necessary for CRUD functionality. However with an additional user story requesting the ability to upload pictures for all cast members, more functionality was required. This was achieved by having a file upload <input> tag added to the HTML/Razor form. To retrieve this datum I also had to include the use of the HttpPostedFileBase to return the data that was uploaded back to the controller.
    One the file was in the controller it was simple to convert the photo file to a byte array (byte[]) which could then be stored in the database. in order for this process to run smoothly I needed to assure that the user was only uploading image files. To manage that, I added a try/catch block that would return a warning message to the user if they attempted to upload a file type other than an image.
    
@@ -38,7 +37,8 @@ Font-awesome
             {
                 if (photoUpload.ContentLength > 0)
                 {
-                    // Takes the HttpPostedFileBase object photoUpload and converts it to an Image object.
+		```diff
+                    + // Takes the HttpPostedFileBase object photoUpload and converts it to an Image object.
                     Image sourceImage = Image.FromStream(photoUpload.InputStream);
 
                     // Sets the castMember.Photo property to the byte array created with ConvertImage()
