@@ -13,18 +13,17 @@ Font-awesome
 
 
 
-Here are the highlights of the code I wrote during this sprint.
-
-Basic CRUD Functionality/Photo Upload and Conversion
-Page Styling
-Search function
-Access Restriction
+### Highlights of the code I wrote during this sprint.
+Basic CRUD Functionality/Photo Upload and Conversion  
+Page Styling  
+Search function  
+Access Restriction  
 
 
 ##### Basic CRUD Functionality/Photo Upload and Conversion
 
-After the creation of the models I needed for the Cast Member section of the website, ASP.NET MVC provided the majority of the scaffolding necessary for CRUD functionality. However with an additional user story requesting the ability to upload pictures for all cast members, more functionality was required. This was achieved by having a file upload <input> tag added to the HTML/Razor form. To retrieve this datum I also had to include the use of the HttpPostedFileBase to return the data that was uploaded back to the controller.
-One the file was in the controller it was simple to convert the photo file to a byte array (byte[]) which could then be stored in the database. in order for this process to run smoothly I needed to assure that the user was only uploading image files. To manage that, I added a try/catch block that would return a warning message to the user if they attempted to upload a file type other than an image.
+   After the creation of the models I needed for the Cast Member section of the website, ASP.NET MVC provided the majority of the scaffolding necessary for CRUD functionality. However with an additional user story requesting the ability to upload pictures for all cast members, more functionality was required. This was achieved by having a file upload <input> tag added to the HTML/Razor form. To retrieve this datum I also had to include the use of the HttpPostedFileBase to return the data that was uploaded back to the controller.
+   One the file was in the controller it was simple to convert the photo file to a byte array (byte[]) which could then be stored in the database. in order for this process to run smoothly I needed to assure that the user was only uploading image files. To manage that, I added a try/catch block that would return a warning message to the user if they attempted to upload a file type other than an image.
 
         CastMembersController.cs
         
@@ -63,8 +62,11 @@ One the file was in the controller it was simple to convert the photo file to a 
 
 
 ###### Page Styling
-The page styling was adjusted based off of a color palette defined by the project-manager and some basic styling guidelines. A combination of bootstrap, basic CSS, and Razor syntax markup were used to manage the appearance of the page. For the Cast Member Index page the design requested different sections based off of the different productions that were currently being performed by the theater. Most of the code below is devoted to manipulating the content in that way.
-	The biggest challenge was to populate the view with the photos from the database. This involved passing those data from the database as a byte[], converting it to a string which could be converted to an image by the src tag of the <img> element.
+   The page styling was adjusted based off of a color palette defined by the project-manager and some basic styling guidelines. A combination of bootstrap, basic CSS, and Razor syntax markup were used to manage the appearance of the page. For the Cast Member Index page the design requested different sections based off of the different productions that were currently being performed by the theater. Most of the code below is devoted to manipulating the content in that way.
+   The biggest challenge was to populate the view with the photos from the database. This involved passing those data from the database as a byte[], converting it to a string which could be converted to an image by the src tag of the <img> element.
+   Razor syntax code  
+   [CSS code](#####index-css-styling)  
+   Next section  
 	
 Index Page gif of 
 
@@ -125,6 +127,163 @@ Generating different sections for different productions and populating photos to
 	</div>
 	<br />
    	}
+	
+#####Index CSS Styling:
+
+		/*=================================
+	    Cast Member Index Page
+	*/
+
+	/* -breakline- */
+	.cast_member-index--breakline {
+	    color: white;
+	    background-color: var(--main-color);
+	    width: 100%;
+	}
+
+	/* -Add Member Button */
+	.cast_member-index--addcastlink {
+	    text-decoration: none;
+	}
+
+	    .cast_member-index--addcastlink:hover {
+		text-decoration: none;
+	    }
+
+	.cast_member-index--createbutton {
+	    background-color: var(--secondary-color);
+	    font-weight: bold;
+	}
+
+	    .cast_member-index--createbutton:hover {
+		background-color: var(--secondary-color--dark);
+		font-weight: bold;
+	    }
+
+	/* -Page Title- */
+	.cast_member-index--title {
+	    text-align: center;
+	    margin-top: 80px;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+
+
+	/*   ---Style cards/overlays---   */
+
+	.cast_member-index--cards {
+	    margin-right: 20px;
+	}
+
+	.cast_member-index--row {
+	    display: flex;
+	}
+
+	.cast_member-index--cardoverlay {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0, 0, 0, 0);
+	    transition: background 0.5s ease;
+	}
+
+	.cast_member-index--cards:hover .cast_member-index--cardoverlay {
+	    background: rgba(0, 0, 0, .3);
+	}
+
+	.cast_member-index--cardbody {
+	    background-color: var(--dark-color);
+	}
+
+	/*   ---Edit, Delete, and Details Buttons---   */
+
+	/* -Edit- */
+	.cast_member-index--editoverlay {
+	    position: absolute;
+	    top: -1%;
+	    left: 0;
+	    background: rgba(0, 0, 0, 0);
+	    transition: opacity 0.5s ease;
+	    opacity: 0%;
+	    text-decoration: none;
+	    color: var(--secondary-color);
+	    z-index: 11;
+	}
+
+	.cast_member-index--cards:hover .cast_member-index--editoverlay {
+	    opacity: 100%;
+	    cursor: pointer;
+	    text-decoration: none;
+	}
+
+	.cast_member-index--editoverlay:hover {
+	    color: var(--main-color);
+	}
+
+	/* -Delete- */
+	.cast_member-index--deleteoverlay {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    background: rgba(0, 0, 0, 0);
+	    transition: opacity 0.5s ease;
+	    opacity: 0%;
+	    color: var(--secondary-color);
+	    z-index: 11;
+	}
+
+	.cast_member-index--cards:hover .cast_member-index--deleteoverlay {
+	    opacity: 100%;
+	    cursor: pointer;
+	}
+
+	.cast_member-index--deleteoverlay:hover {
+	    color: var(--main-color);
+	}
+
+
+	/* -Details- */
+	.cast_member-index--detailslink {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    z-index: 10;
+	}
+
+
+	/* -Search Bar Styling- */
+	/*   ---Alter input focus color---   */
+	.cast_memeber-index-inputglow {
+	    background-color: #a6a6a6;
+	    margin: 30px auto 10px;
+	}
+
+	.cast_memeber-index-inputglow:focus {
+	    border-color: var(--secondary-color);
+	    box-shadow: 0 0 10px var(--secondary-color);
+	    background-color: var(--light-color);
+	}
+
+	.cast_member-index--positivebutton {
+	    background-color: var(--secondary-color);
+	    font-weight: bold;
+	}
+
+	.cast_member-index--positivebutton:hover {
+	    background-color: var(--secondary-color--dark);
+	}
+
+	.cast_member-index--buttoncontainer{
+	    text-align: center;
+	}
+
+	/*
+	    END Cast Member Index Page
+	==================================*/
 	
 
 
