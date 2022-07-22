@@ -37,8 +37,7 @@ Font-awesome
             {
                 if (photoUpload.ContentLength > 0)
                 {
-		```diff
-                    + // Takes the HttpPostedFileBase object photoUpload and converts it to an Image object.
+                    // Takes the HttpPostedFileBase object photoUpload and converts it to an Image object.
                     Image sourceImage = Image.FromStream(photoUpload.InputStream);
 
                     // Sets the castMember.Photo property to the byte array created with ConvertImage()
