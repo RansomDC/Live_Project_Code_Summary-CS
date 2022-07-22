@@ -128,7 +128,7 @@ Generating different sections for different productions and populating photos to
 	<br />
    	}
 	
-#Index CSS Styling:
+# Index CSS Styling:
 
 		/*=================================
 	    Cast Member Index Page
