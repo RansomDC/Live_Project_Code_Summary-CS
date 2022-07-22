@@ -65,7 +65,7 @@ Access Restriction
    The page styling was adjusted based off of a color palette defined by the project-manager and some basic styling guidelines. A combination of bootstrap, basic CSS, and Razor syntax markup were used to manage the appearance of the page. For the Cast Member Index page the design requested different sections based off of the different productions that were currently being performed by the theater. Most of the code below is devoted to manipulating the content in that way.
    The biggest challenge was to populate the view with the photos from the database. This involved passing those data from the database as a byte[], converting it to a string which could be converted to an image by the src tag of the <img> element.
    Razor syntax code  
-   [CSS code](index-css-styling)  
+   [CSS code](#index-css-styling)  
    Next section  
 	
 Index Page gif of 
@@ -128,7 +128,7 @@ Generating different sections for different productions and populating photos to
 	<br />
    	}
 	
-##### Index CSS Styling:
+#Index CSS Styling:
 
 		/*=================================
 	    Cast Member Index Page
