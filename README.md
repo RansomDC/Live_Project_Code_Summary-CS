@@ -24,6 +24,8 @@ Font-awesome
 
    After the creation of the models I needed for the Cast Member section of the website, ASP.NET MVC provided the majority of the scaffolding necessary for CRUD functionality. However with an additional user story requesting the ability to upload pictures for all cast members, more functionality was required. This was achieved by having a file upload <input> tag added to the HTML/Razor form. To retrieve this datum I also had to include the use of the HttpPostedFileBase to return the data that was uploaded back to the controller.
    One the file was in the controller it was simple to convert the photo file to a byte array (byte[]) which could then be stored in the database. in order for this process to run smoothly I needed to assure that the user was only uploading image files. To manage that, I added a try/catch block that would return a warning message to the user if they attempted to upload a file type other than an image.
+   
+![CRUD functionality and Idex page](https://github.com/RansomDC/Live_Project_Code_Summary-CS/blob/main/theater%20CRUD.gif)
 
         CastMembersController.cs
         
@@ -67,8 +69,8 @@ Font-awesome
    [Razor syntax code](#razor-syntax-code)  
    [CSS code](#index-css-styling)  
    [Next Section](#search-function) 
-	
-# Index Page gif of  
+
+![Photo add to database and display](https://github.com/RansomDC/Live_Project_Code_Summary-CS/blob/main/Create%20member%20%2B%20photo%20upload.gif)
 
 # Razor Syntax Code
 Generating different sections for different productions and populating photos to the view.
@@ -291,6 +293,8 @@ Generating different sections for different productions and populating photos to
 # Search Function  
 Creating a search function was a fun and interesting task. For this example I created a new view that would represent the search results but would appear the same as the main index page. The controller collected all of the cast member information from the database, and I then filtered that, based on the search criteria, into a new list that was passed to the view.
 
+![Search Example gif](https://github.com/RansomDC/Live_Project_Code_Summary-CS/blob/main/Theater%20Search.gif)
+
     CastMembersController.cs
 
     // GET: Prod/CastMembers/Search
@@ -310,9 +314,6 @@ Creating a search function was a fun and interesting task. For this example I cr
 
         return View(resultsList);
     }
-
-search gif:
-
 
 
 # Access Restriction  
