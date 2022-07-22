@@ -4,12 +4,12 @@
 ###Overview
 During the last two weeks of my Software Development Bootcamp at The Tech Academy I worked with several other students to build and develop an ASP.NET core MVC  web application in C#. We completed the minimum viable product (MVP) within a two week sprint and in addition to the MVP stories, I was able to complete several additional user stories ahead of time. The program was for a theater company and I was responsible for creating the section of the website that displayed and maintained the cast members' information.
 
-###Technologies used:
-ASP.NET core MVC
-C#
-CSS
-Bootstrap
-Font-awesome
+###Technologies used:  
+ASP.NET core MVC  
+C#  
+CSS  
+Bootstrap  
+Font-awesome  
 
 
 
