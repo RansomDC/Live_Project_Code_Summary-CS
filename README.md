@@ -7,6 +7,7 @@ During the last two weeks of my Software Development Bootcamp at The Tech Academ
 
 ### Technologies used:  
 ASP.NET core MVC  
+Entity Framework  
 C#  
 CSS  
 Bootstrap  
